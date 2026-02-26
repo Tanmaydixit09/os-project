@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
-import { Lock, User } from 'lucide-react';
+import { Lock, User, ArrowLeft } from 'lucide-react';
 import { useAuthStore } from '../store/authStore';
 
-export function LoginForm() {
+interface LoginFormProps {
+  onBack?: () => void;
+}
+
+export function LoginForm({ onBack }: LoginFormProps) {
   const [uid, setUid] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -20,6 +24,16 @@ export function LoginForm() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center p-4">
       <div className="bg-white rounded-lg shadow-xl p-8 w-full max-w-md">
+        {onBack && (
+          <button
+            onClick={onBack}
+            className="flex items-center text-gray-600 hover:text-gray-800 mb-4 transition-colors"
+          >
+            <ArrowLeft className="h-4 w-4 mr-1" />
+            Back to Home
+          </button>
+        )}
+        
         <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">Secure Chat Login</h2>
         
         {error && (
